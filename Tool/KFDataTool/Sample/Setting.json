@@ -1,0 +1,12 @@
+{
+  "import_code_paths":[{"path":"../../KFScript"}],
+  "import_kfd_path":  "ImportKFD",
+  "export_code_path": "ExportCode",
+  "export_kfd_path":  "ExportKFD",
+  "export_kfd_table": "KFDTable.json",
+  "template_path": "Template",
+  "namespace":"KF",
+  "code_type":"cpp",
+  "data_type":"bytearr",
+  "info":null
+}

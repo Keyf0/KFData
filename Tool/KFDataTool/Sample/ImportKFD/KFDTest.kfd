@@ -1,0 +1,9 @@
+[{"includes": ["KFDTest.h"]
+, "typedef": 1
+, "typeid": 0
+, "class": "BaseA"
+, "extend": ""
+, "propertys": [{"id": 1, "KEY": "CLASSID", "name": "id", "type": "int32"}, {"id": 2, "name": "name", "type": "kfstr"}]
+, "clsid": 1004}
+,
+{"includes": ["KFDTest.h"], "class": "ClsB", "extend": "BaseA", "propertys": [{"id": 1, "name": "type", "type": "int8"}, {"id": 2, "name": "des", "type": "kfstr"}, {"id": 3, "name": "argArr", "otype": "int32", "type": "arr"}], "clsid": 1005}]
