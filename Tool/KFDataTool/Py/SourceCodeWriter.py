@@ -78,10 +78,10 @@ class SourceCodeWriter(object):
             #如果不需要导出结构体则需要输出一个KFD文件
             if not kfd.exportstruct:
                 kfd.exportKFD(export_kfd_path)
-            else:
+            elif not kfd.isinclude:
                 kfd.exportStruct(exportCodePath)
             #导出解析文件吧
-            if exportKFD is not None:
+            if exportKFD is not None and not kfd.isinclude:
                 #导出数据
                 exportKFD(kfd,self.kfd_tabel,exportCodePath,includes)
             i += 1

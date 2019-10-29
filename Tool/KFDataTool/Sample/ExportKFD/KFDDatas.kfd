@@ -1,0 +1,464 @@
+[
+    {
+        "includes": [
+            "Format/KFD.h"
+        ],
+        "class": "KFDataTypeDef",
+        "nof": 1,
+        "propertys": [
+            {
+                "id": 1,
+                "name": "int8",
+                "type": "kfstr",
+                "default": "int8"
+            },
+            {
+                "id": 2,
+                "name": "uint8",
+                "type": "kfstr",
+                "default": "uint8"
+            },
+            {
+                "id": 3,
+                "name": "int16",
+                "type": "kfstr",
+                "default": "int16"
+            },
+            {
+                "id": 4,
+                "name": "uint16",
+                "type": "kfstr",
+                "default": "uint16"
+            },
+            {
+                "id": 5,
+                "name": "int32",
+                "type": "kfstr",
+                "default": "int32"
+            },
+            {
+                "id": 6,
+                "name": "int",
+                "type": "kfstr",
+                "default": "int"
+            },
+            {
+                "id": 7,
+                "name": "uint32",
+                "type": "kfstr",
+                "default": "uint32"
+            },
+            {
+                "id": 8,
+                "name": "num1",
+                "type": "kfstr",
+                "default": "num1"
+            },
+            {
+                "id": 9,
+                "name": "float",
+                "type": "kfstr",
+                "default": "float"
+            },
+            {
+                "id": 10,
+                "name": "num2",
+                "type": "kfstr",
+                "default": "num2"
+            },
+            {
+                "id": 11,
+                "name": "double",
+                "type": "kfstr",
+                "default": "double"
+            },
+            {
+                "id": 12,
+                "name": "kfstr",
+                "type": "kfstr",
+                "default": "kfstr"
+            },
+            {
+                "id": 13,
+                "name": "null",
+                "type": "kfstr",
+                "default": "null"
+            },
+            {
+                "id": 14,
+                "name": "kfBytes",
+                "type": "kfstr",
+                "default": "kfBytes"
+            },
+            {
+                "id": 15,
+                "name": "bool",
+                "type": "kfstr",
+                "default": "bool"
+            },
+            {
+                "id": 16,
+                "name": "varuint",
+                "type": "kfstr",
+                "default": "varuint"
+            },
+            {
+                "id": 17,
+                "name": "int64",
+                "type": "kfstr",
+                "default": "int64"
+            },
+            {
+                "id": 18,
+                "name": "uint64",
+                "type": "kfstr",
+                "default": "uint64"
+            },
+            {
+                "id": 19,
+                "name": "arr",
+                "type": "kfstr",
+                "default": "arr"
+            },
+            {
+                "id": 20,
+                "name": "mixarr",
+                "type": "kfstr",
+                "default": "mixarr"
+            },
+            {
+                "id": 21,
+                "name": "object",
+                "type": "kfstr",
+                "default": "object"
+            },
+            {
+                "id": 22,
+                "name": "mixobject",
+                "type": "kfstr",
+                "default": "mixobject"
+            }
+        ],
+        "clsid": 1161
+    },
+    {
+        "includes": [
+            "Format/KFD.h"
+        ],
+        "nof": 1,
+        "class": "KFDAttachEnum",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "pname",
+                "type": "kfstr"
+            },
+            {
+                "id": 2,
+                "name": "pval",
+                "type": "kfstr"
+            },
+            {
+                "id": 3,
+                "name": "enum",
+                "type": "kfstr"
+            }
+        ],
+        "clsid": 1158
+    },
+    {
+        "includes": [
+            "Format/KFD.h"
+        ],
+        "nof": 1,
+        "class": "KFDTag",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "tag",
+                "type": "kfstr"
+            },
+            {
+                "id": 2,
+                "name": "val",
+                "type": "kfstr"
+            }
+        ],
+        "clsid": 1193
+    },
+    {
+        "includes": [
+            "Format/KFD.h",
+            "KFDAttachEnumF.h",
+            "KFDTagF.h"
+        ],
+        "nof": 1,
+        "class": "KFDProperty",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "id",
+                "type": "uint32"
+            },
+            {
+                "id": 2,
+                "name": "name",
+                "type": "kfstr"
+            },
+            {
+                "id": 3,
+                "name": "cname",
+                "type": "kfstr"
+            },
+            {
+                "id": 4,
+                "name": "des",
+                "type": "kfstr"
+            },
+            {
+                "id": 5,
+                "enum": "KFDataTypeDef",
+                "name": "type",
+                "type": "kfstr"
+            },
+            {
+                "id": 6,
+                "enum": "KFDataTypeDef",
+                "name": "otype",
+                "type": "kfstr"
+            },
+            {
+                "id": 7,
+                "name": "default",
+                "type": "kfstr"
+            },
+            {
+                "id": 8,
+                "name": "KEY",
+                "type": "kfstr"
+            },
+            {
+                "id": 9,
+                "name": "OR",
+                "type": "int8"
+            },
+            {
+                "id": 10,
+                "name": "enum",
+                "type": "kfstr"
+            },
+            {
+                "id": 11,
+                "name": "enumattach",
+                "type": "arr",
+                "otype": "KFDAttachEnum"
+            },
+            {
+                "id": 11,
+                "name": "unknowtags",
+                "type": "arr",
+                "otype": "KFDTag"
+            }
+        ],
+        "clsid": 1159
+    },
+    {
+        "includes": [
+            "Format/KFD.h",
+            "KFDPropertyF.h",
+            "KFDTagF.h"
+        ],
+        "nof": 1,
+        "class": "KFDMethod",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "name",
+                "type": "kfstr"
+            },
+            {
+                "id": 2,
+                "name": "cname",
+                "type": "kfstr"
+            },
+            {
+                "id": 3,
+                "name": "des",
+                "type": "kfstr"
+            },
+            {
+                "id": 4,
+                "name": "params",
+                "otype": "KFDProperty",
+                "type": "arr"
+            },
+            {
+                "id": 5,
+                "name": "retparam",
+                "otype": "KFDProperty",
+                "type": "object"
+            },
+            {
+                "id": 6,
+                "name": "templ",
+                "type": "kfstr"
+            },
+            {
+                "id": 7,
+                "name": "extend",
+                "type": "kfstr"
+            },
+            {
+                "id": 8,
+                "default": "false",
+                "name": "is",
+                "type": "bool"
+            },
+            {
+                "id": 9,
+                "name": "unknowtags",
+                "type": "arr",
+                "otype": "KFDTag"
+            }
+        ],
+        "clsid": 1194
+    },
+    {
+        "includes": [
+            "Format/KFD.h",
+            "KFDPropertyF.h",
+            "KFDMethodF.h",
+            "KFDTagF.h"
+        ],
+        "nof": 1,
+        "class": "KFD",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "class",
+                "type": "kfstr"
+            },
+            {
+                "id": 2,
+                "name": "extend",
+                "type": "kfstr"
+            },
+            {
+                "id": 3,
+                "name": "cname",
+                "type": "kfstr"
+            },
+            {
+                "id": 4,
+                "name": "des",
+                "type": "kfstr"
+            },
+            {
+                "id": 5,
+                "name": "template",
+                "type": "kfstr"
+            },
+            {
+                "id": 6,
+                "name": "typedef",
+                "type": "int8"
+            },
+            {
+                "id": 7,
+                "name": "typeid",
+                "type": "int32"
+            },
+            {
+                "id": 8,
+                "name": "includes",
+                "otype": "kfstr",
+                "type": "arr"
+            },
+            {
+                "id": 9,
+                "name": "propertys",
+                "otype": "KFDProperty",
+                "type": "arr"
+            },
+            {
+                "id": 10,
+                "name": "orprops",
+                "otype": "KFDProperty",
+                "type": "arr"
+            },
+            {
+                "id": 11,
+                "default": "0",
+                "name": "clsid",
+                "type": "uint32"
+            },
+            {
+                "id": 12,
+                "default": "0",
+                "name": "nof",
+                "type": "int8"
+            },
+            {
+                "id": 13,
+                "name": "methods",
+                "otype": "KFDMethod",
+                "type": "arr"
+            },
+            {
+                "id": 14,
+                "name": "unknowtags",
+                "type": "arr",
+                "otype": "KFDTag"
+            }
+        ],
+        "clsid": 1160
+    },
+    {
+        "includes": [
+            "Format/KFDAnyObject.h"
+        ],
+        "class": "KFDAnyObject",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "name": "clsname",
+                "type": "kfstr"
+            },
+            {
+                "id": 2,
+                "name": "object",
+                "type": "kfBytes",
+                "read": "ReadAny",
+                "write": "WriteAny"
+            }
+        ],
+        "clsid": 1303
+    },
+    {
+        "includes": [
+            "Utils/KFDataType.h"
+        ],
+        "class": "kfTypeid",
+        "extend": "",
+        "propertys": [
+            {
+                "id": 1,
+                "default": "0",
+                "name": "id",
+                "type": "int32"
+            },
+            {
+                "id": 2,
+                "name": "name",
+                "type": "kfstr"
+            }
+        ],
+        "clsid": 1302
+    }
+]

@@ -4,7 +4,8 @@
 
 class KFD(object):
 
-    def __init__(self,kfdtable,exportstruct = True,kfd_datas = None):
+    def __init__(self,kfdtable,exportstruct = True,kfd_datas = None,isinclude = False):
+        self.isinclude = isinclude
         self.exportstruct = exportstruct
         self.methodKFDData = None
         self.kfd_table = kfdtable

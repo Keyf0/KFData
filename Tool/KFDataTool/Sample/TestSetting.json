@@ -1,11 +1,21 @@
 {
-  "import_code_paths":[{"path":"../../Test/KFData"}],
-  "import_kfd_path":  "ImportKFD",
-  "export_code_path": "../../Test/KFData",
-  "export_kfd_path":  "ExportKFD",
-  "export_kfd_table": "KFDTable.json",
-  "template_path": "Template",
-  "namespace":"KF",
-  "code_type":"cpp",
-  "data_type":"bytearr"
+    "import_groups": [],
+    "import_kfd_path": "",
+    "export_code_path": "",
+    "export_kfd_path": "",
+    "export_kfd_table": "",
+    "template_path": "",
+    "namespace": "",
+    "code_type": "",
+    "data_type": "",
+    "info_props": [],
+    "typeDefTypes": [],
+    "projectname": "",
+    "include_kfd_paths": [
+        {
+            "path": "",
+            "headpath": ""
+        }
+    ],
+    "__cls__": "KFDataToolSetting"
 }

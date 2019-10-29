@@ -1,0 +1,44 @@
+{
+    "class": "KFDataToolIncludeInfo",
+    "extend": "",
+    "cname": "导入依赖KFD",
+    "des": "",
+    "template": "",
+    "typedef": 0,
+    "typeid": 0,
+    "includes": [],
+    "propertys": [
+        {
+            "id": 1,
+            "name": "path",
+            "cname": "依赖KFD目录",
+            "des": "",
+            "type": "kfstr",
+            "otype": "",
+            "default": "",
+            "KEY": "",
+            "OR": 0,
+            "enum": "KFDataToolFileStr",
+            "enumattach": []
+        },
+        {
+            "id": 3,
+            "name": "headpath",
+            "cname": "附加路径",
+            "des": "",
+            "type": "kfstr",
+            "otype": "",
+            "default": "",
+            "KEY": "",
+            "OR": 0,
+            "enum": "",
+            "enumattach": []
+        }
+    ],
+    "orprops": [],
+    "clsid": 0,
+    "nof": 1,
+    "methods": [],
+    "unknowtags": [],
+    "__cls__": "KFD"
+}

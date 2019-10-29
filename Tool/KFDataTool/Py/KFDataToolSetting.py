@@ -54,6 +54,8 @@
 ]
 
 ,
+
+  "include_kfd_paths":[],///导入的KFD只是一个依赖关系，不生成STRUCT也不生成KFD，也不生成代码
   "import_kfd_path":  "导出预先生成的KFD", 
   "export_code_path": "默认导出的代码目录",
   "export_kfd_path":  "导出的KFD目录",
@@ -249,6 +251,23 @@ class KFDataToolSetting(object):
                 self.import_code_objs.append(codepathobj)
                 logging.info("in=%s,out=%s",codepathobj["path"],export_code_path)
                 index -= 1
+
+
+            #add include_kfd_paths for depend
+            include_kfd_paths = tryobj(setting, "include_kfd_paths")
+            includecount = 0
+            if include_kfd_paths is not None:
+                includecount = len(include_kfd_paths)
+                pass
+
+            i = 0
+            self.include_kfd_paths = []
+            while i < includecount:
+                pathobj = include_kfd_paths[i]
+                self.include_kfd_paths.append(abspath(pathobj["path"]))
+                i += 1
+                pass
+
 
             self.import_kfd_path = abspath(trystr(setting,"import_kfd_path"))
             self.export_code_path = abspath(trystr(setting,"export_code_path"))

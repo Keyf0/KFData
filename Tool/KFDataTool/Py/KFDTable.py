@@ -167,6 +167,7 @@ class KFDTable(pyKFDTable):
             return
         self.info = setting.info
         self.load_table(setting)
+        self.load_include_kfds(setting)
         self.load_kfds(setting)
         self.load_dir_group(setting)
         self.is_loaded = True
@@ -213,7 +214,19 @@ class KFDTable(pyKFDTable):
 
         pass
 
-    def load_kfd_dir(self, dirpath, exportstruct, JSONFILE = False):
+    def load_include_kfds(self,setting):
+        if self.is_loaded:
+            return
+        include_kfd_paths = setting.include_kfd_paths
+        if include_kfd_paths:
+            for i in include_kfd_paths:
+                self.load_kfd_dir(include_kfd_paths[i], False, False, True)
+                pass
+            pass
+        pass
+
+
+    def load_kfd_dir(self, dirpath, exportstruct, JSONFILE = False, IsInclude = False):
         if os.path.exists(dirpath):
             files = os.listdir(dirpath)
             for file in files:
@@ -221,11 +234,11 @@ class KFDTable(pyKFDTable):
                 if not os.path.isdir(filepath):
                     if file.endswith(".kfd") or (JSONFILE and file.endswith(".json")):
                         kfdpath = filepath
-                        kfd = KFD(self, exportstruct)
+                        kfd = KFD(self, exportstruct, None, IsInclude)
                         kfd.load(kfdpath)
                     pass
                 else:
-                    self.load_kfd_dir(filepath, exportstruct)
+                    self.load_kfd_dir(filepath, exportstruct, JSONFILE, IsInclude)
         else:
             logging.error("dirpath[%s] FileNotFoundError",dirpath)
         pass

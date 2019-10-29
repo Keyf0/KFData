@@ -4,8 +4,13 @@ from KFDTable import *
 from SourceCodeWriter import *
 from KFDataToolSetting import *
 
+'''
+1.0.1
+增加include_kfd_paths 只文件夹下的文件只加载进来依赖不做任何输出    
 
-KFDATA_TOOL_VER = "1.0.0 beta2"
+'''
+
+KFDATA_TOOL_VER = "1.0.1"
 
 def main(args):
 
