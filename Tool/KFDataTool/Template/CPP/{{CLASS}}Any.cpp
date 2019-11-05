@@ -41,5 +41,5 @@ namespace ${NS}
 
 
 
-    static bool Any${CLASS}::IsRegisted = false;
+    bool Any${CLASS}::IsRegisted = false;
 }
