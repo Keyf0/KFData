@@ -20,6 +20,7 @@ namespace ${NS}
         static void Delete${data.class}(kfAny obj);
         
  #end for
+        static bool IsRegisted;
     	static void Regist();
     };
 

@@ -30,8 +30,16 @@ namespace ${NS}
 #end for
     void Any${CLASS}::Regist()
     {
+        if(IsRegisted)
+            return;
+        IsRegisted = true;
+
       #for $data in $datas
         REG_KFD_FORMAT_ANY("${data.class}", &Any${CLASS}::Read${data.class}, &Any${CLASS}::Write${data.class},&Any${CLASS}::Delete${data.class});
       #end for
     }
+
+
+
+    static bool Any${CLASS}::IsRegisted = false;
 }
