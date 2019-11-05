@@ -259,10 +259,18 @@ class CodeFile(object):
                     pobj["OR"] = int(pairs[1])
                 elif pairkey == "CALL":
                     pobj["call"] = pairs[1]
-                elif pairkey == "ITEMCALL":
+                elif pairkey == "ITEMCALL":#貌似这个没有用处了？
                     pobj["itemcall"] = pairs[1]
                 elif pairkey == "CLEAR":
                     pobj["clear"] = pairs[1]
+                elif pairkey == "ARRCLEAR":
+                    pobj["arrclear"] = pairs[1]
+                elif pairkey == "ARRSIZE":
+                    pobj["arrsize"] = pairs[1]
+                elif pairkey == "ARRPUSH":
+                    pobj["arrpush"] = pairs[1]
+                elif pairkey == "ARRBACK":
+                    pobj["arrback"] = pairs[1]
                 elif pairkey == "READ":
                     pobj["read"] = pairs[1]
                 elif pairkey == "WRITE":

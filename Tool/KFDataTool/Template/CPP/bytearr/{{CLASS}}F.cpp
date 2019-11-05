@@ -63,20 +63,53 @@ namespace ${NS}
                     {
                         uint32 arrsize = buffarr.ReadVarUInt();
                         buffarr.Skip(1); /// array object type
+
+                        #if "clear" in $prop 
+                        obj->${prop.clear}();
+                        #else
+                        
+                        #if "arrclear" in $prop
+                        obj->${prop.name}.${prop.arrclear}();
+                        #else
                         obj->${prop.name}.clear();/// clear arr
+                        #end if
+
+                        #end if
+
                         #if $baseids.get($prop.otype) == None 
                         for(uint32 i = 0 ;i < arrsize; i ++)
                         {
+                            #if "arrpush" in $prop
+                            obj->${prop.name}.${prop.arrpush}(${prop.otype}());
+                            #else
                             obj->${prop.name}.push_back(${prop.otype}());
+                            #end if
+
+
+                            #if "arrback" in $prop
+                            auto& itm = obj->${prop.name}.${prop.arrback}();
+                            #else
                             auto& itm = obj->${prop.name}.back();
+                            #end if
+
+
                             ${prop.otype}F::Read(buffarr,&itm);
+                            ///如果有CALL需要调用下元素的CALL
+                            #if "call" in $prop 
+                                obj->${prop.call}(itm);
+                            #end if
                         }
                         #else
                         for(uint32 i = 0 ;i < arrsize; i ++)
                         {
                             ${prop.otype} itm;
                             ${prop.otype}Read(buffarr,itm);
+
+                            #if "arrpush" in $prop
+                            obj->${prop.name}.${prop.arrpush}(itm);
+                            #else
                             obj->${prop.name}.push_back(itm);
+                            #end if
                         }
                         #end if
                     }
@@ -84,7 +117,13 @@ namespace ${NS}
                     {
                        ///a virtual object
                        auto& arrval = obj->${prop.name};
+                       
+                       #if "arrsize" in $prop
+                       auto arrsize = arrval.${prop.arrsize}();
+                       #else
                        auto arrsize = arrval.size();
+                       #end if
+
                        auto arrindex = buffarr.ReadVarUInt(); /// OBJ_PROP_ID_BEGIN
 
                        while(arrindex != OBJ_PROP_ID_END)
@@ -105,13 +144,32 @@ namespace ${NS}
                                 else
                                 {
                                     #if $baseids.get($prop.otype) == None 
+
+                                    #if "arrpush" in $prop
+                                    obj->${prop.name}.${prop.arrpush}(${prop.otype}());
+                                    #else
                                     obj->${prop.name}.push_back(${prop.otype}());
+                                    #end if
+
+                                    #if "arrback" in $prop
+                                    auto& itm = obj->${prop.name}.${prop.arrback}();
+                                    #else
                                     auto& itm = obj->${prop.name}.back();
+                                    #end if
+
                                     ${prop.otype}F::Read(buffarr,&itm);
                                     #else
                                     ${prop.otype} itm;
                                     ${prop.otype}Read(buffarr,itm);
+                                    
+
+                                    #if "arrpush" in $prop
+                                    obj->${prop.name}.${prop.arrpush}(itm);
+                                    #else
                                     obj->${prop.name}.push_back(itm);
+                                    #end if
+                                    
+
                                     #end if
                                 }
                             }
@@ -131,10 +189,16 @@ namespace ${NS}
                     {
                         uint32 arrsize = buffarr.ReadVarUInt();
 
-                        #if $prop.clear != None 
+                        #if "clear" in $prop 
                         obj->${prop.clear}();
                         #else
+
+                        #if $prop.arrclear != None
+                        obj->${prop.name}.${prop.arrclear}();
+                        #else
                         obj->${prop.name}.clear();/// clear arr Memory Leak
+                        #end if
+
                         #end if
 
                         #if $baseids.get($prop.otype) == None 
@@ -143,10 +207,15 @@ namespace ${NS}
                            ${prop.otype}* itm = ${prop.otype}F::Read${prop.otype}(buffarr);
                            if(itm)
                            {
-                                #if $prop.call != None 
+                                #if "call" in $prop 
                                 obj->${prop.call}(itm);
                                 #end if
-                                obj->${prop.name}.push_back(itm);
+
+                                #if $prop.arrpush != None
+                                obj->${prop.name}.${prop.arrpush}(${prop.otype}());
+                                #else
+                                obj->${prop.name}.push_back(${prop.otype}());
+                                #end if
                            }
                            else
                            {
@@ -162,7 +231,12 @@ namespace ${NS}
                     {
                         ///a virtual object
                        auto& arrval = obj->${prop.name};
+                       #if "arrsize" in $prop
+                       auto arrsize = arrval.${prop.arrsize}();
+                       #else
                        auto arrsize = arrval.size();
+                       #end if
+
                        auto arrindex = buffarr.ReadVarUInt(); /// OBJ_PROP_ID_BEGIN
 
                        while(arrindex != OBJ_PROP_ID_END)
@@ -180,7 +254,7 @@ namespace ${NS}
                                     if(newitm != itm)
                                     {
                                         /// clear old value
-                                        #if $prop.clear != None
+                                        #if "clear" in $prop
                                         obj->${prop.clear}(itm);
                                         #else
                                         kfDel(itm);
@@ -190,7 +264,7 @@ namespace ${NS}
                                         obj->${prop.name}[arrindex] = itm;
                                     }
 
-                                    #if $prop.call != None 
+                                    #if "call" in $prop 
                                     /// call itm update...
                                     obj->${prop.call}(itm);
                                     #end if
@@ -203,10 +277,16 @@ namespace ${NS}
                                 {
                                     #if $baseids.get($prop.otype) == None 
                                     ${prop.otype}* itm = ${prop.otype}F::Read${prop.otype}(buffarr);
-                                    #if $prop.call != None 
+                                    #if "call" in $prop 
                                     obj->${prop.call}(itm);
                                     #end if
+
+                                    #if "arrpush" in $prop
+                                    obj->${prop.name}.${prop.arrpush}(itm);
+                                    #else
                                     obj->${prop.name}.push_back(itm);
+                                    #end if
+
                                     #else
                                     #silent $sys.stderr.write("mixarr Only supports the definition of the Object type\n")
                                     #end if
@@ -242,7 +322,7 @@ namespace ${NS}
 
                     if(oldval != newval)
                     {
-                        #if $prop.clear != None
+                        #if "clear" in $prop
                         obj->${prop.clear}();
                         #else
                         kfDel(obj->${prop.name});
@@ -306,7 +386,13 @@ namespace ${NS}
             buffarr.WriteByte(${typeids.get($prop.type)});///write arr type
             
             auto& arritms = obj->${prop.name};
+            
+            #if "arrsize" in $prop
+            uint32 arrsize = kf_2_uint32(arritms.${prop.arrsize}());
+            #else
             uint32 arrsize = kf_2_uint32(arritms.size());
+            #end if
+
             buffarr.WriteVarUInt(arrsize);
 
             #if $baseids.get($prop.otype) == None 
@@ -327,7 +413,14 @@ namespace ${NS}
         {
             buffarr.WriteByte(${typeids.get($prop.type)});///write mixarr type
             auto& arritms = obj->${prop.name};
+            
+            #if "arrsize" in $prop
+            uint32 arrsize = kf_2_uint32(arritms.${prop.arrsize}());
+            #else
             uint32 arrsize = kf_2_uint32(arritms.size());
+            #end if
+
+
             buffarr.WriteVarUInt(arrsize);
             for(uint32 i = 0 ;i < arrsize; i ++)
             {
