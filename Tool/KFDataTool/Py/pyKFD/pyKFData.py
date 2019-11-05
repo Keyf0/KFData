@@ -164,7 +164,7 @@ class pyKFDValue(object):
         return None
         pass
 
-    def add_arrval(self,otype,CREATE=False,jsonobj=None):
+    def add_arrval(self,otype,CREATE=False,jsonobj=None, propinfo=None):
         valitem = None
         if not pyKFDataType.Is_BaseTypeStr(otype):
             okfddata = pyKFDTable.kfdTB.get_kfddata(otype)
@@ -186,6 +186,8 @@ class pyKFDValue(object):
             valitem = pyKFDValue()
             valitem.valueType = ovType
             valitem.val = default_val(None, ovType)
+            #为了增加ENUM的支持 临时增加没有详细测试 2019.17.24
+            valitem.propinfo = propinfo
 
             if jsonobj is not None and CREATE:
                 valitem.val = jsonobj
@@ -432,15 +434,31 @@ class pyKFDValue(object):
                     okfddata = pyKFDTable.kfdTB.get_kfddata(otype)
                     #数组绑定下
                     self.bind_valarr(okfddata,False,CREATE,jsonobj)
-                elif CREATE and jsonobj is not None:
-                    #普通通数组的话
-                    i = 0
-                    size = len(jsonobj)
-                    while i < size:
-                        ival = jsonobj[i]
-                        self.add_arrval(otype,CREATE,ival)
-                        i += 1
+                else:
+                    #普通数组也需要绑定
+                    proparr = self.val
+                    if proparr is not None:
+                        i = 0
+                        size = len(proparr)
+                        while i < size:
+                            propval = proparr[i]
+                            if propval is not None:
+                                propval.propinfo = propinfo
+                                pass
+                            i += 1
+                            pass
+                    #普通数组的创建过程
+                    if CREATE and jsonobj is not None:
+                        #普通通数组的话
+                        i = 0
+                        size = len(jsonobj)
+                        while i < size:
+                            ival = jsonobj[i]
+                            self.add_arrval(otype,CREATE,ival,propinfo)
+                            i += 1
+                        pass
                     pass
+
             else:
                 logging.warning("propinfo not found otype:%s",propinfo["name"])
         elif self.valueType == pyKFDataType.OT_MIXARRAY:
@@ -468,6 +486,7 @@ class pyKFDValue(object):
                         kfddata = propval.get_kfddata(True)
                     if kfddata is not None:
                         propval.bind_kfddata(kfddata,CREATE)
+                        pass
                 i += 1
                 pass
             ###########

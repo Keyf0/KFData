@@ -37,7 +37,7 @@ def AddPropertyWin(editor,master):
     elif valueType == pyKFDataType.OT_ARRAY:
         childval = None
         if "otype" in value.propinfo:
-            childval = value.add_arrval(value.propinfo["otype"],True)
+            childval = value.add_arrval(value.propinfo["otype"],True, None, value.propinfo)
         else:
             logging.warning("arr not found otype:%s",value.propinfo["name"])
         if childval is not None:

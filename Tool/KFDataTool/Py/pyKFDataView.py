@@ -312,7 +312,7 @@ def get_sys_arg_value(argname,args):
     pass
 
 def loadtypeDefTypes(path):
-    
+
     jsonfile = path + "/typeDefTypes.json"
     typeDefTypes = LoadConfigFromJson(jsonfile)
 
@@ -350,6 +350,10 @@ def pyKFDataView_main():
 
     path = get_sys_arg_value("kfdpath", args)
 
+    inPath = get_sys_arg_value("in", args)
+    outPath = get_sys_arg_value("out", args)
+
+
     if path is None:
         path = "../ExportKFD"
         pass
@@ -367,8 +371,45 @@ def pyKFDataView_main():
 
     kfdTable.make_typedef()
 
-
     pyKFDTable.kfdTB = kfdTable
 
-    view = KFDataViewer()
-    view.show()
+    if inPath is None:
+        view = KFDataViewer()
+        view.show()
+    else:
+        pyKFDataExport2(inPath, outPath)
+        pass
+
+
+def pyKFDataExport2(inPath, outPath):
+
+    inPath = abspath(inPath)
+    outPath = abspath(outPath)
+
+    kfdvalue = None
+    if inPath.find(".json") == -1:
+        with open(inPath, 'rb') as f:
+            kf_byte_arr = KFByteArray()
+            kf_byte_arr.buffer = f.read()
+            kfdvalue = pyKFDataFormat.read_value(kf_byte_arr, False)
+            logging.info("kf_byte_arr available_size:%d",kf_byte_arr.available_size())
+            pass
+    else:
+        jsonobj = LoadConfigFromJson(inPath)
+        kfdvalue = pyKFDJsonFormat.ImportJson(jsonobj)
+
+    if kfdvalue:
+
+        if outPath.find(".json") == -1:
+            buff = KFByteArray()
+            pyKFDataFormat.write_value(buff, kfdvalue)
+            if outPath != '':
+                with open(outPath, 'wb') as f:
+                    f.write(buff.buffer)
+        else:
+            jsonobj = pyKFDJsonFormat.ExportJson(kfdvalue)
+            SaveConfigFromObject(outPath,jsonobj)
+            pass
+        pass
+    pass
+

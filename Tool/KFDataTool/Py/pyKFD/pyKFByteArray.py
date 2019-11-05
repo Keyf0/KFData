@@ -148,6 +148,9 @@ class KFByteArray(object):
         return _r
 
     def write_byte(self, val):
+        if val > 127:
+            val = (256 - val) * (-1)
+            pass
         self.buffer += struct.pack('>b', val)
 
     def write_ubyte(self, val):
