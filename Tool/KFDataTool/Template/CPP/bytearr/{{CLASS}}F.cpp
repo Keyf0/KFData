@@ -119,7 +119,7 @@ namespace ${NS}
                        auto& arrval = obj->${prop.name};
                        
                        #if "arrsize" in $prop
-                       auto arrsize = arrval.${prop.arrsize}();
+                       auto arrsize = kf_2_uint32(arrval.${prop.arrsize}());
                        #else
                        auto arrsize = arrval.size();
                        #end if
@@ -232,7 +232,7 @@ namespace ${NS}
                         ///a virtual object
                        auto& arrval = obj->${prop.name};
                        #if "arrsize" in $prop
-                       auto arrsize = arrval.${prop.arrsize}();
+                       auto arrsize = kf_2_uint32(arrval.${prop.arrsize}());
                        #else
                        auto arrsize = arrval.size();
                        #end if
