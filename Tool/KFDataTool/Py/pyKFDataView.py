@@ -311,6 +311,27 @@ def get_sys_arg_value(argname,args):
     return None
     pass
 
+def loadtypeDefTypes(path):
+    
+    jsonfile = path + "/typeDefTypes.json"
+    typeDefTypes = LoadConfigFromJson(jsonfile)
+
+    if typeDefTypes is not None:
+            Base_Type_ids = KFDataType.Base_Type_ids
+            Type_to_ids = KFDataType.Type_to_ids
+
+            for typeDef in typeDefTypes:
+                typename = trystr(typeDef,"key")
+                customdef = trystr(typeDef,"value")
+                typeid = KFDataType.GetTypeID(typename)
+                if typeid != pyKFDataType.OT_UNKNOW and typeid <= pyKFDataType.OT_UINT64:
+                    Base_Type_ids[customdef] = typeid
+                    Type_to_ids[customdef] = typeid
+                    pass
+                pass
+            pass
+    pass
+
 def pyKFDataView_main():
 
     init_logging(logging.DEBUG, True)
@@ -339,7 +360,10 @@ def pyKFDataView_main():
     #加载内嵌的KFD
     kfdTable.load_kfd_dir(abspath("./embed"), False, True)
     #加载导出FKD
-    kfdTable.load_kfd_dir(abspath(path),False)
+    kfddirpath = abspath(path)
+    kfdTable.load_kfd_dir(kfddirpath, False)
+    #加载typeDefTypes.json
+    loadtypeDefTypes(kfddirpath)
 
     kfdTable.make_typedef()
 

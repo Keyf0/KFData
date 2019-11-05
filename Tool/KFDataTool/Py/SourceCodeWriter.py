@@ -55,6 +55,12 @@ class SourceCodeWriter(object):
         path = export_kfd_path + "/" + setting.export_kfd_table
         SaveConfigFromObject(path,obj)
 
+        #保存一下个自定义的数据
+        if setting.typeDefTypes and len(setting.typeDefTypes) > 0:
+            typeDefTypesPath = export_kfd_path + "/typeDefTypes.json"
+            SaveConfigFromObject(typeDefTypesPath, setting.typeDefTypes)
+            pass
+
         #根据类型导出所有的类型或解析类
 
         code_type = setting.code_type
