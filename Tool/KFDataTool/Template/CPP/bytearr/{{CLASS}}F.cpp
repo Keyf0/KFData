@@ -212,9 +212,9 @@ namespace ${NS}
                                 #end if
 
                                 #if $prop.arrpush != None
-                                obj->${prop.name}.${prop.arrpush}(${prop.otype}());
+                                obj->${prop.name}.${prop.arrpush}(itm);
                                 #else
-                                obj->${prop.name}.push_back(${prop.otype}());
+                                obj->${prop.name}.push_back(itm);
                                 #end if
                            }
                            else
